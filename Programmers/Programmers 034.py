@@ -1,6 +1,10 @@
-# 내적
-def solution(a, b):
+# 멀쩡한 사각형
+def solution(w, h):
     answer = 0
-    for a_number, b_number in zip(a, b):
-        answer += a_number * b_number
-    return answer
+    if w == h:
+        return w * h - w
+    elif w == 1 or h == 1:
+        return 0
+    for i in range(1, w + 1):
+        answer += h * (w - i) // w
+    return answer * 2
