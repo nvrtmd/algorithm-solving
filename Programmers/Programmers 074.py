@@ -1,21 +1,13 @@
-# 시저 암호
-def solution(s, n):
-    answer = ''
-    for i in s:
-        if i == ' ':
-            answer += i
-            continue
-
-        pushed = ord(i) + n
-        if 97 <= ord(i) < 123:
-            if pushed > 122:
-                answer += chr(pushed - 123 + 97)
-            else:
-                answer += chr(ord(i) + n)
-        else:
-            if pushed > 90:
-                answer += chr(pushed - 91 + 65)
-            else:
-                answer += chr(ord(i) + n)
-
-    return answer
+# 카펫
+def solution(brown, yellow):
+    divisors = []
+    for i in range(1, yellow + 1):
+        if i in divisors:
+            break
+        if yellow % i == 0:
+            divisors.append(i)
+            divisors.append(yellow // i)
+    divisors.sort()
+    for i in range(len(divisors) // 2):
+        if (divisors[i] + divisors[-i - 1]) * 2 + 4 == brown:
+            return [divisors[-i - 1] + 2, divisors[i]+2]
