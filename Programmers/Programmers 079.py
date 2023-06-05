@@ -7,3 +7,23 @@ def prime_check(n):     # n이 소수인지 아닌지 판별
             return False
     return True
 
+
+def convert(n, m):
+    result = ''
+    while n > 0:
+        n, mod = divmod(n, m)
+        result += str(mod)
+
+    return result[::-1]
+
+
+def solution(n, k):
+    answer = 0
+
+    converted = convert(n, k)
+    num_arr = converted.split('0')
+
+    for splitted in num_arr:
+        if splitted and prime_check(int(splitted)):
+            answer += 1
+    return answer
