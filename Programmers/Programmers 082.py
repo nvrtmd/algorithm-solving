@@ -1,23 +1,19 @@
-# 소수 찾기
-from itertools import permutations
-import math
+# 최솟값 만들기
+import heapq
 
 
-def is_prime(n):
-    if n <= 1:
-        return False
-    for i in range(2, int(n ** 0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
+def solution(A, B):
+    answer = 0
+    dic = {'A': sorted(A), 'B': sorted(B)}
+    arr = []
+    for a in A:
+        heapq.heappush(arr, [a, 'B'])
+    for b in B:
+        heapq.heappush(arr, [b, 'A'])
 
+    for _ in range(len(arr) // 2):
+        num1, key = heapq.heappop(arr)
+        num2 = dic[key].pop()
+        answer += num1 * num2
 
-def solution(numbers):
-    answer = set()
-    for i in range(1, len(numbers) + 1):
-        b = list(permutations(list(numbers), i))
-        for j in list(set(b)):
-            if is_prime(int("".join(j))):
-                answer.add(int("".join(j)))
-    print(sorted(list(answer)))
-    return len(answer)
+    return answer
