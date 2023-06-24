@@ -1,21 +1,14 @@
-# 이진 변환 반복하기 (진법 변환 함수 포함)
-def convert(n, m):
-    result = ''
-    while n > 0:
-        n, mod = divmod(n, m)
-        result += str(mod)
+# 숫자의 표현
+def solution(n):
+    answer = 0
 
-    return result[::-1]
+    for i in range(1, n + 1):
+        sum = 0
+        for j in range(i, n + 1):
+            sum += j
+            if sum == n:
+                answer += 1
+            elif sum > n:
+                break
 
-
-def solution(s):
-    count = 0
-    zero_count = 0
-
-    while s != "1":
-        zero_count += s.count("0")
-        length = len(s) - s.count("0")
-        s = convert(length, 2)
-        count += 1
-
-    return [count, zero_count]
+    return answer
